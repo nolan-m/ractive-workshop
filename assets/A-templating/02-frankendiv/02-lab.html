@@ -11,21 +11,47 @@
 	<style>
 		#frankendiv {
 			display: inline-block;
+			background-color: white;
 			height: 100px; width: 100px;
 			border: 1px solid steelblue;
+		}
+		.choice {
+			height: 50px;
+			width: 50px;
+			display: inline-block;
+		  margin: 10px;
 		}
 	</style>
 </head>
 <body>
 
 <script id='template' type='text/ractive'>
-	<div id='frankendiv'></div>
+	<div style="height: {{size}}px; width: {{size}}px; background-color: {{color}}; border-width: {{bordersize}}px;" id='frankendiv'></div>
+	<br>
+	<label>Box Size</label>
+	<input type='range' min='10' max='300' step='10' value='{{size}}'>
+	<br>
+	<label>Border Size:</label>
+	<input type="number" min="1" max="25" value="{{bordersize}}"> pixels
+	<br>
+	<label>Background Color:</label>
+	<br>
+	{{#each colors}}
+		<div class="choice" style="background-color: {{this}};" on-click="clicked:{{this}}"></div>
+	{{/each}}
 </script>
 
 <script>
-new Ractive({
+var ractive = new Ractive({
 	el: document.body,
-	template: '#template'
+	template: '#template',
+	lazy: true,
+	data: {
+		colors: ['blue', 'red', 'orange', 'green', 'purple', 'black']
+, 	}
+});
+ractive.on('clicked', function(ev, color) {
+	this.set('color', color);
 })
 </script>
 
