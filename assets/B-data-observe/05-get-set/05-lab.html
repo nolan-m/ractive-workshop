@@ -6,19 +6,35 @@
 
 	<link rel="stylesheet" type="text/css" href="../../css/style.css">
 	<script src='../../js/ractive.js'></script>
+  <script src='../../data/planets.js'></script>
 	<script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
-
+  <style>
+      .planet {
+      margin: 10px 0px 30px 10px;
+      width: 250px; height: 250px;
+      padding: 10px 25px 20px 35px;
+      border: 1px solid black;
+    }
+    </style>
 </head>
 <body>
 
 <script id='template' type='text/ractive'>
-
+  {{#each planets}}
+    <div class="planet">
+      {{planet}}
+      Temperature: {{temperature_high_f}} F
+    </div>
+  {{/each}}
 </script>
 
 <script>
-new Ractive({
+window.ractive = new Ractive({
 	el: document.body,
-	template: '#template'
+	template: '#template',
+  data: {
+      planets: planets
+  }
 })
 </script>
 

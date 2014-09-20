@@ -17,11 +17,20 @@
 	  {{.}}<br>
 	{{/each}}
 
+	{{# items:i}}
+		{{i}} x {{i}} = {{i*i}}<br>
+	{{/}}
+
 	{{#with parent}}
 		{{#each children}}
 			<p>{{name}} is a child of {{../../name}}</p>
 		{{/each}}
 	{{/with}}
+
+	{{#each price}}
+	<p>price: {{ format(.) }}</p>
+	{{/each}}
+
 </script>
 
 <script>
@@ -34,11 +43,18 @@ new Ractive({
 		parent: {
 			name: 'bob',
 			children: [
-				{ name: 'sally' },
-				{ name: 'fred' },
-				{ name: 'lucy' }
-			]
-		}
+				{ name: 'sally', age: 5 },
+				{ name: 'fred', age: 8 },
+				{ name: 'lucy', age: 12 }
+			],
+			formatage:  function(age) {
+				return age + " years old"
+			}
+		},
+		price: [10, 20, 30, 40],
+    format: function(price){
+        return '$' + price + '.00'
+    }
 	}
 })
 </script>

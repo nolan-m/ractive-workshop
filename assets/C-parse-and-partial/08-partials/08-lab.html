@@ -12,8 +12,30 @@
 <body>
 
 <script id='template' type='text/ractive'>
-{{JSON.stringify(root)}}
+
+	<div class='root'>
+	  {{#root.files}}
+	    {{>file}}
+	  {{/root}}
+	</div>
+
+
+	<!-- {{>file}} -->
+		<figure class='file'>
+			{{type}} - {{filename}}
+
+			{{#if type==="folder"}}
+				{{#each files}}
+					{{>file}}
+				{{/each}}
+			{{/if}}
+
+		</figure>
+	<!-- {{/file}} -->
 </script>
+
+
+
 
 <script>
 
