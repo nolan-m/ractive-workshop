@@ -14,9 +14,11 @@
 <script id='template' type='text/ractive'>
 
 	<div class='root'>
-	  {{#root.files}}
-	    {{>file}}
-	  {{/root}}
+	  <ul>
+	  	{{#root.files}}
+	    	<li>{{>file}}</li>
+	  	{{/root}}
+	  </ul>
 	</div>
 
 
@@ -25,9 +27,10 @@
 			{{type}} - {{filename}}
 
 			{{#if type==="folder"}}
-				{{#each files}}
-					{{>file}}
+				<ul>{{#each files}}
+					<li>{{>file}}</li>
 				{{/each}}
+				</ul>
 			{{/if}}
 
 		</figure>
@@ -38,6 +41,20 @@
 
 
 <script>
+var keyedData = [
+	{ id: 1, parent: null, name: 'I am 1 and have no parent' },
+	{ id: 2, parent: 1, name: 'I am 2 and 1 is my parent' },
+	{ id: 3, parent: 1, name: 'I am 3 and 1 is my parent' },
+	{ id: 4, parent: 2, name: 'I am 4 and 2 is my parent' },
+	{ id: 5, parent: 2, name: 'I am 5 and 2 is my parent' },
+	{ id: 6, parent: 4, name: 'I am 6 and 4 is my parent' },
+	{ id: 7, parent: 4, name: 'I am 7 and 4 is my parent' },
+	{ id: 8, parent: 7, name: 'I am 8 and 7 is my parent' },
+	{ id: 9, parent: 3, name: 'I am 9 and 3 is my parent' },
+	{ id: 10, parent: 9, name: 'I am 10 and 9 is my parent' },
+	{ id: 11, parent: 1, name: 'I am 11 and 1 is my parent' },
+	{ id: 12, parent: 11, name: 'I am 12 and 11 is my parent' },
+]
 
 var ractive = new Ractive({
 	el: document.body,
@@ -55,23 +72,11 @@ var ractive = new Ractive({
 		        ]}
 		    ]
 		}
-	}
+	},
+	keyedData: keyedData
 })
 
-var keyedData = [
-	{ id: 1, parent: null, name: 'I am 1 and have no parent' },
-	{ id: 2, parent: 1, name: 'I am 2 and 1 is my parent' },
-	{ id: 3, parent: 1, name: 'I am 3 and 1 is my parent' },
-	{ id: 4, parent: 2, name: 'I am 4 and 2 is my parent' },
-	{ id: 5, parent: 2, name: 'I am 5 and 2 is my parent' },
-	{ id: 6, parent: 4, name: 'I am 6 and 4 is my parent' },
-	{ id: 7, parent: 4, name: 'I am 7 and 4 is my parent' },
-	{ id: 8, parent: 7, name: 'I am 8 and 7 is my parent' },
-	{ id: 9, parent: 3, name: 'I am 9 and 3 is my parent' },
-	{ id: 10, parent: 9, name: 'I am 10 and 9 is my parent' },
-	{ id: 11, parent: 1, name: 'I am 11 and 1 is my parent' },
-	{ id: 12, parent: 11, name: 'I am 12 and 11 is my parent' },
-]
+
 
 </script>
 
